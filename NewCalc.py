@@ -105,37 +105,43 @@ def main():
 
     digit_box = tk.Frame(frame, background="black", width=400,height=50)
     digit_box.pack_propagate(False)
-    digit_box.grid(row=0,column=0,columnspan=4)
     digit_box.pack() 
 
     textBox = tk.Label(digit_box,text="1+1",background="black", font=10,fg='white')
-    textBox.grid(row=0,column=0,columnspan=4)
+    textBox.grid(row=0,column=0)
+    textBox.pack_propagate(False)
     textBox.pack()
-   
-   
-    btn_four= RoundedButton(frame,text="4",radius=45,btnbackground="gray",btnforeground="white")
+
+    btn_seven = tk.Button(frame, text="7", width=5, background="white")
+    btn_seven.grid(row=1, column=0, padx=5, pady=10)
+    btn_seven.pack(fill="both")
+
+
+    btn_eight = tk.Button(frame, text="8", width=5, background="white")
+    btn_eight.grid(row=1, column=1, padx=5, pady=10)
+    btn_eight.pack(fill="both")
+
+    btn_nine = tk.Button(frame, text="9", width=5, background="white")
+    btn_nine.grid(row=1, column=2, padx=5, pady=10)
+    btn_nine.pack(fill="both")
+
+    btn_four= tk.Button(frame,text="4", width=5, background="white")
     btn_four.grid(row=2,column=0, padx=5, pady=10)
     btn_four.pack(fill="both")
-   
-    btn_five= RoundedButton(frame,text="5",radius=45,btnbackground="gray",btnforeground="white")
+
+    btn_five= tk.Button(frame,text="5", width=5, background="white")
     btn_five.grid(row=2,column=1, padx=5, pady=10)
     btn_five.pack(fill="both")
 
-    btn_six = RoundedButton(frame,text="6",radius=45,btnbackground="gray",btnforeground="white")
+    btn_six = tk.Button(frame,text="6", width=5, background="white")
     btn_six.grid(row=2,column=2, padx=5, pady=10)
     btn_six.pack(fill="both")
-     
-    btn_seven = RoundedButton(frame,text="7",radius=45,btnbackground="gray",btnforeground="white")
-    btn_seven.grid(row=1,column=0, padx=5, pady=10)
-    btn_seven.pack(fill="both")
 
-    btn_eight= RoundedButton(frame,text="8",radius=45,btnbackground="gray",btnforeground="white")
-    btn_eight.grid(row=1,column=1, padx=5, pady=10)
-    btn_eight.pack(fill="both")
+
 
     btn = RoundedButton(frame,text="Button", radius=100,btnbackground="gray", btnforeground="white", clicked=func)
     btn.grid(row=1,column=0)
-    btn.pack(expand=True,fill="both")
+    btn.pack(expand=False,fill="both")
 
     # btn = RoundedButton(text="This is a \n rounded button", radius=1000, btnbackground="#0078ff", btnforeground="#ffffff", clicked=func)
     # btn.pack(expand=True, fill="both")
