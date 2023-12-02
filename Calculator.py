@@ -67,9 +67,9 @@ class Calculator:
                 else:
                     self.calc(item, 0)
 
-                  
 
 def main():
+
 
     #INITIALIZE WINDOW
     #INITIALIZE GRID
