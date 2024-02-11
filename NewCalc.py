@@ -10,22 +10,22 @@ class RoundedButton(tk.Canvas):
         self.btnbackground = btnbackground
         self.clicked = clicked
 
-        self.radius = radius        
-        
+        self.radius = radius
+
         self.rect = self.round_rectangle(0, 0, 0, 0, tags="button", radius=radius, fill=btnbackground)
         self.text = self.create_text(0, 0, text=text, tags="button", fill=btnforeground, font=("Times", 30), justify="center")
 
         self.tag_bind("button", "<ButtonPress>", self.border)
         self.tag_bind("button", "<ButtonRelease>", self.border)
         self.bind("<Configure>", self.resize)
-        
+
         text_rect = self.bbox(self.text)
         if int(self["width"]) < text_rect[2]-text_rect[0]:
             self["width"] = (text_rect[2]-text_rect[0]) + 10
-        
+
         if int(self["height"]) < text_rect[3]-text_rect[1]:
             self["height"] = (text_rect[3]-text_rect[1]) + 10
-          
+
     def round_rectangle(self, x1, y1, x2, y2, radius=25, update=False, **kwargs): # if update is False a new rounded rectangle's id will be returned else updates existing rounded rect.
         # source: https://stackoverflow.com/a/44100075/15993687
         points = [x1+radius, y1,
@@ -51,7 +51,7 @@ class RoundedButton(tk.Canvas):
 
         if not update:
             return self.create_polygon(points, **kwargs, smooth=True)
-        
+
         else:
             self.coords(self.rect, points)
 
@@ -68,10 +68,10 @@ class RoundedButton(tk.Canvas):
 
         if event.width < text_bbox[2]-text_bbox[0]:
             width = text_bbox[2]-text_bbox[0] + 30
-        
-        if event.height < text_bbox[3]-text_bbox[1]:  
+
+        if event.height < text_bbox[3]-text_bbox[1]:
             height = text_bbox[3]-text_bbox[1] + 30
-        
+
         self.round_rectangle(5, 5, width-5, height-5, radius, update=True)
 
         bbox = self.bbox(self.rect)
@@ -103,7 +103,7 @@ def calculator_text_enter(code, textlabel):
         textlabel.configure(text="")
     need_reset=False
 
-    value = textlabel.cget("text") 
+    value = textlabel.cget("text")
     match str(code):
         case "ENTER":
             need_reset = True
@@ -111,19 +111,19 @@ def calculator_text_enter(code, textlabel):
                 textlabel.configure(text=eval(value))
             except ZeroDivisionError as e:
                 textlabel.configure(text="--ERROR--\nDIVIDE BY ZERO")
-        case "CLR":             
+        case "CLR":
             need_reset = False
             textlabel.configure(text="")
         case _:
-            value = f"{value}{code}" 
+            value = f"{value}{code}"
             textlabel.configure(text=value)
-             
+
     print(code)
 
 def main():
 ## CONFIG INIT
 
-    
+
     _size_configs = {
         "frame_width"       : 410,
         "frame_height"      : 460,
@@ -149,14 +149,14 @@ def main():
     clear_button_color  = "#1D1B2E"
 
 
-    
+
 ## GUI INIT
 
     root = tk.Tk()
     root.resizable(False,False)
-    root.geometry(f"{_size_configs["frame_width"]}x{_size_configs["frame_height"]}")
+    root.geometry(f"{_size_configs['frame_width']}x{_size_configs['frame_height']}")
 
-    
+
 
     display_frame = tk.Frame(root, height=100, width=_size_configs["frame_width"], bg=display_color)
     display_frame.pack_propagate(False)
@@ -165,11 +165,11 @@ def main():
     label_text = tk.StringVar()
     label_text.set("")
     display_label = tk.Label(display_frame,
-                             anchor=tk.CENTER, 
-                             borderwidth=0, 
-                             fg=display_text_color, 
-                             bg=display_color, 
-                             text=label_text.get(), 
+                             anchor=tk.CENTER,
+                             borderwidth=0,
+                             fg=display_text_color,
+                             bg=display_color,
+                             text=label_text.get(),
                              font=("Helvetica", _size_configs["display_font_size"]))
     display_label.pack_propagate(False)
     display_label.pack(fill=tk.BOTH)
@@ -193,7 +193,7 @@ def main():
         for j in range(len(keypad_layout[i])):
             if keypad_layout[i][j] == -1:
                 continue
-            
+
             buttontext = str(keypad_layout[i][j])
             button = (tk.Button(keypad_frame,
                                 text=buttontext,
@@ -228,12 +228,12 @@ def main():
     button_zero.grid(row=3,column=0,columnspan=2, sticky="nsew")
     button_enter.grid(row=2, column=4, rowspan=2, sticky="nsew")
     button_clr.grid(row=0,column=4, rowspan=2, sticky="nsew")
-        
+
     button_enter.configure(bg=enter_button_color, fg="white")
     button_clr.configure(bg=clear_button_color, fg="white")
     button_decimal.configure(bg=num_decimal_color)
 
     root.mainloop()
- 
+
 if __name__ == "__main__":
     main()
